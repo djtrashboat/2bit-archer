@@ -5,9 +5,9 @@ var global_position_f: Vector2
 
 func _physics_process(delta: float) -> void:
 	_velocity.y += gravity * delta
-	if is_on_floor():
-		print("is on floor")
-		_velocity.x = 0
+	if is_on_wall():
+		#print("is on floor")
+		_velocity.x *= -0.3
 	if Input.is_action_just_pressed("click"):
 		global_position_i = get_global_mouse_position()
 	if Input.is_action_just_released("click"):
