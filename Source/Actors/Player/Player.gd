@@ -32,19 +32,31 @@ func play_animation(velocity: Vector2) -> void:
 	elif velocity.y > 0.0:
 		if velocity.x == 0.0:
 			$AnimatedSprite.flip_h = false
-			$AnimatedSprite.play("fall")
+			if enable_mov:
+				$AnimatedSprite.play("fall_1")
+			else: $AnimatedSprite.play("fall_0")
 		elif velocity.x < 0.0:
 			$AnimatedSprite.flip_h = true
-			$AnimatedSprite.play("fall")
+			if enable_mov:
+				$AnimatedSprite.play("fall_1")
+			else: $AnimatedSprite.play("fall_0")
 		elif velocity.x > 0.0:
 			$AnimatedSprite.flip_h = false
-			$AnimatedSprite.play("fall")
+			if enable_mov:
+				$AnimatedSprite.play("fall_1")
+			else: $AnimatedSprite.play("fall_0")
 	elif velocity.y < 0.0:
 		if velocity.x > 0.0:
 			$AnimatedSprite.flip_h = false
-			$AnimatedSprite.play("jump")
+			if enable_mov:
+				$AnimatedSprite.play("jump_1")
+			else: $AnimatedSprite.play("jump_0")
 		elif velocity.x < 0.0:
 			$AnimatedSprite.flip_h = true
-			$AnimatedSprite.play("jump")
+			if enable_mov:
+				$AnimatedSprite.play("jump_1")
+			else: $AnimatedSprite.play("jump_0")
 		else:
-			$AnimatedSprite.play("jump")
+			if enable_mov:
+				$AnimatedSprite.play("jump_1")
+			else: $AnimatedSprite.play("jump_0")
