@@ -21,10 +21,10 @@ func _physics_process(delta: float) -> void:
 			global_position_f = get_global_mouse_position()
 			_velocity = calculate_impulse()#aplica o impulso a velocidade assim que o player solta o mouse 
 			enable_mov = false#assim que o player aplica o impulso, ele perde o controle do personagem
-			$Camera2D/ScreenShake/Frequency.stop()
+			#$Camera2D/ScreenShake/Frequency.stop()
 			populo = false
-		if Input.is_action_pressed("click_right"):
-			$Camera2D/ScreenShake.start()
+		#if Input.is_action_pressed("click_right"):
+			#$Camera2D/ScreenShake.start()
 	move_and_slide(_velocity * max_speed)#vrummmm
 	if !populo:
 		play_animation(_velocity)#toca animacao
