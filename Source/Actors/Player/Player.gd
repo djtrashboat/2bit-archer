@@ -3,6 +3,7 @@ extends "res://Source/Actors/Actor.gd"
 var global_position_i: Vector2#guarda a posicao do clique do mouse
 var global_position_f: Vector2#guarda a posicao de quando solta o mouse
 var enable_mov: bool#se true o player pode comandar o personagem
+var populo: bool = false
 
 func _physics_process(delta: float) -> void:
 	_velocity.y += gravity * delta#aplicando a gravidade
@@ -14,12 +15,19 @@ func _physics_process(delta: float) -> void:
 	if enable_mov:#os comandos so funcionam se enablemov for true
 		if Input.is_action_just_pressed("click_right"):#guarda a posicao do clique do mouse
 			global_position_i = get_global_mouse_position()
+			$AnimatedSprite.play("populo")
+			populo = true
 		if Input.is_action_just_released("click_right"):#guarda a posicao de quando solta o mouse
 			global_position_f = get_global_mouse_position()
 			_velocity = calculate_impulse()#aplica o impulso a velocidade assim que o player solta o mouse 
 			enable_mov = false#assim que o player aplica o impulso, ele perde o controle do personagem
+			$Camera2D/ScreenShake/Frequency.stop()
+			populo = false
+		if Input.is_action_pressed("click_right"):
+			$Camera2D/ScreenShake.start()
 	move_and_slide(_velocity * max_speed)#vrummmm
-	play_animation(_velocity)#toca animacao
+	if !populo:
+		play_animation(_velocity)#toca animacao
 	
 func calculate_impulse() -> Vector2:#calcula o impulso a partir das cordenadas do mouse
 	var impulse: Vector2
