@@ -72,22 +72,19 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 8, 8 )
+extents = Vector2( 6, 7 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 gravity = 120.0
-max_speed = Vector2( 2, 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -8 )
 frames = SubResource( 3 )
-animation = "fall_1"
-frame = 1
-playing = true
+animation = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -8 )
+position = Vector2( 1, -7 )
 shape = SubResource( 4 )
 
 [node name="Camera2D" type="Camera2D" parent="."]

@@ -5,13 +5,17 @@ var global_position_f: Vector2
 var enable_mov: bool
 
 func _physics_process(delta: float) -> void:
+	print(_velocity)
 	_velocity.y += gravity * delta
+	if is_on_ceiling():
+		print("is on ceiling")
+		_velocity.y = 0
 	if is_on_wall():
 		_velocity.x *= -0.3
 	if enable_mov:
-		if Input.is_action_just_pressed("click"):
+		if Input.is_action_just_pressed("click_right"):
 			global_position_i = get_global_mouse_position()
-		if Input.is_action_just_released("click"):
+		if Input.is_action_just_released("click_right"):
 			global_position_f = get_global_mouse_position()
 			_velocity = calculate_impulse()
 			enable_mov = false
@@ -19,8 +23,6 @@ func _physics_process(delta: float) -> void:
 	play_animation(_velocity)
 	
 func calculate_impulse() -> Vector2:
-	Input.is_action_just_pressed("click")
-	Input.is_action_just_released("click")
 	var impulse: Vector2
 	impulse = (global_position_i - global_position_f)
 	return impulse
