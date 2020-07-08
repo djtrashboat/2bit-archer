@@ -5,7 +5,6 @@ var global_position_f: Vector2
 var enable_mov: bool
 
 func _physics_process(delta: float) -> void:
-	print(_velocity)
 	_velocity.y += gravity * delta
 	if is_on_ceiling():
 		print("is on ceiling")
