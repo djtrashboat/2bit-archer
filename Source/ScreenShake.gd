@@ -7,11 +7,11 @@ var amplitude = 0
 
 onready var camera = get_parent()
 
-func start(duration = 0.1, frequency = 10, amplitude = 0.5):
+func start(frequency = 10, amplitude = 0.5):
 	self.amplitude = amplitude
-	$Duration.wait_time = duration
+	#$Duration.wait_time = duration
 	$Frequency.wait_time = 1 / float(frequency)
-	$Duration.start()
+	#$Duration.start()
 	$Frequency.start()
 	
 	_new_shake()

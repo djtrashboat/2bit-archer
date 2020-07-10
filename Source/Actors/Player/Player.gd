@@ -4,12 +4,14 @@ var global_position_i: Vector2#guarda a posicao do clique do mouse
 var global_position_f: Vector2#guarda a posicao de quando solta o mouse
 var enable_mov: bool #se true o player pode comandar o personagem
 var populo: bool = false
+var mousehold: bool = false
+var mouserelease: bool = false
 
 func _physics_process(delta: float) -> void:
 	_velocity.y += gravity * delta#aplicando a gravidade
 	if $ceilingcast.is_colliding():#detecta se o player esta no teto
-		_velocity.y = 12#se o player estiver no teto ele ganha velocidade em y para cair e nao grudar la
-	elif is_on_wall():#bounce bounce
+		_velocity.y = 10#se o player estiver no teto ele ganha velocidade em y para cair e nao grudar la
+	elif is_on_wall():#bounce bounce (on walls)
 		_velocity.x *= -0.3#coeficiente de bounce
 		enable_mov = true#quando o player bate na parede, ele ganha o comando de volta
 	if enable_mov:#os comandos so funcionam se enablemov for true
@@ -25,21 +27,26 @@ func calculate_impulse() -> Vector2:#calcula o impulso a partir das cordenadas d
 
 func _get_input():
 	if Input.is_action_just_pressed("click_right"):#guarda a posicao do clique do mouse
-		global_position_i = get_global_mouse_position()
-		$AnimatedSprite.play("populo")
-		populo = true
+		#global_position_i = get_global_mouse_position()
+		global_position_i = get_viewport().get_mouse_position()
+		#$AnimatedSprite.play("populo")
+		mousehold = true
 	if Input.is_action_just_released("click_right"):#guarda a posicao de quando solta o mouse
-		global_position_f = get_global_mouse_position()
+		#global_position_f = get_global_mouse_position()
+		global_position_f = get_viewport().get_mouse_position()
 		_velocity = calculate_impulse()#aplica o impulso a velocidade assim que o player solta o mouse 
 		enable_mov = false#assim que o player aplica o impulso, ele perde o controle do personagem
-		$Camera2D/ScreenShake/Frequency.stop()
+		#$Camera2D/ScreenShake/Frequency.stop()
+		mousehold = false
 		populo = false
-	if Input.is_action_pressed("click_right"):
-		$Camera2D/ScreenShake.start()
 
 func _update():
-	if !populo:
+	if !mousehold:
 		play_animation(_velocity)
+		$Camera2D/ScreenShake/Frequency.stop()
+	else:
+		$Camera2D/ScreenShake.start()
+		$AnimatedSprite.play("populo")
 
 func _process(delta: float) -> void:
 	_update()

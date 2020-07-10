@@ -421,4 +421,6 @@ modulate = Color( 0.976471, 0.972549, 0.909804, 1 )
 self_modulate = Color( 0.976471, 0.972549, 0.909804, 1 )
 
 [node name="draw line" type="Node2D" parent="Cursor"]
+modulate = Color( 0.976471, 0.972549, 0.909804, 1 )
+self_modulate = Color( 0.976471, 0.972549, 0.909804, 1 )
 script = ExtResource( 6 )
