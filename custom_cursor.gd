@@ -2,6 +2,7 @@ extends Node2D
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	#$"draw line"._start()
 	
 func _process(delta: float) -> void:
 	$Sprite.position = get_global_mouse_position()
@@ -11,7 +12,7 @@ func _process(delta: float) -> void:
 		_ditch_line()
 
 func _drawline():
-	$"draw line"._ready()
+	$"draw line"._ready_to_draw()
 
 func _ditch_line():
 	$"draw line"._end_line()

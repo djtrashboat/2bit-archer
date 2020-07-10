@@ -13,27 +13,36 @@ func _physics_process(delta: float) -> void:
 		_velocity.x *= -0.3#coeficiente de bounce
 		enable_mov = true#quando o player bate na parede, ele ganha o comando de volta
 	if enable_mov:#os comandos so funcionam se enablemov for true
-		if Input.is_action_just_pressed("click_right"):#guarda a posicao do clique do mouse
-			global_position_i = get_global_mouse_position()
-			$AnimatedSprite.play("populo")
-			populo = true
-		if Input.is_action_just_released("click_right"):#guarda a posicao de quando solta o mouse
-			global_position_f = get_global_mouse_position()
-			_velocity = calculate_impulse()#aplica o impulso a velocidade assim que o player solta o mouse 
-			enable_mov = false#assim que o player aplica o impulso, ele perde o controle do personagem
-			$Camera2D/ScreenShake/Frequency.stop()
-			populo = false
-		if Input.is_action_pressed("click_right"):
-			$Camera2D/ScreenShake.start()
+		_get_input()
 	move_and_slide(_velocity * max_speed)#vrummmm
-	if !populo:
-		play_animation(_velocity)#toca animacao
+	#if !populo:
+	#	play_animation(_velocity)#toca animacao
 	
 func calculate_impulse() -> Vector2:#calcula o impulso a partir das cordenadas do mouse
 	var impulse: Vector2
 	impulse = (global_position_i - global_position_f)
 	return impulse
 
+func _get_input():
+	if Input.is_action_just_pressed("click_right"):#guarda a posicao do clique do mouse
+		global_position_i = get_global_mouse_position()
+		$AnimatedSprite.play("populo")
+		populo = true
+	if Input.is_action_just_released("click_right"):#guarda a posicao de quando solta o mouse
+		global_position_f = get_global_mouse_position()
+		_velocity = calculate_impulse()#aplica o impulso a velocidade assim que o player solta o mouse 
+		enable_mov = false#assim que o player aplica o impulso, ele perde o controle do personagem
+		$Camera2D/ScreenShake/Frequency.stop()
+		populo = false
+	if Input.is_action_pressed("click_right"):
+		$Camera2D/ScreenShake.start()
+
+func _update():
+	if !populo:
+		play_animation(_velocity)
+
+func _process(delta: float) -> void:
+	_update()
 
 func play_animation(velocity: Vector2) -> void:#toca animacao
 	if is_on_wall():# and (velocity.x< (0.1) or velocity.x> (-0.1)):# ***o player detecta o chao como parede***, #sem a segudanda parte ele ficava girando o sprite sem parar
