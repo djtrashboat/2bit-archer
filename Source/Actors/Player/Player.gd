@@ -1,11 +1,8 @@
 extends "res://Source/Actors/Actor.gd"
 
-onready var ArrowNode := get_node("Arrow")
 
 var global_position_i: Vector2#guarda a posicao do clique do mouse
 var global_position_f: Vector2#guarda a posicao de quando solta o mouse
-var global_arrow_position_i: Vector2
-var global_arrow_position_f: Vector2
 var arrow_angle: float
 
 
@@ -31,10 +28,7 @@ func _physics_process(delta: float) -> void:
 	#if !populo:
 	#	play_animation(_velocity)#toca animacao
 	
-func calculate_impulse(vi: Vector2, vf: Vector2) -> Vector2:#calcula o impulso a partir das cordenadas do mouse
-	var impulse: Vector2
-	impulse = (vi - vf)
-	return impulse
+
 
 func _get_input():
 	if Input.is_action_just_pressed("click_right"):#guarda a posicao do clique do mouse
@@ -51,24 +45,9 @@ func _get_input():
 		mousehold = false
 		populo = false
 #************************
-	if Input.is_action_just_pressed("click_left"):
-		global_arrow_position_i = get_viewport().get_mouse_position()
-		mousehold = true
-		var point: Vector2
-		point.x = 0
-		point.y = 0
-		arrow_angle = global_arrow_position_i.angle_to_point(point)
-	if Input.is_action_just_released("click_left"):
-		global_arrow_position_f = get_viewport().get_mouse_position()
-		_arrow_velocity = calculate_impulse(global_arrow_position_i, global_arrow_position_f)
-		launch_arrow(arrow_angle)
 		
 		
-func launch_arrow(angle: float) -> void:
-		ArrowNode.visible = true
-		
-	
-	
+
 func _update():
 	if !mousehold:
 		play_animation(_velocity)
