@@ -10,7 +10,7 @@ var mouserelease: bool = false
 func _physics_process(delta: float) -> void:
 	_velocity.y += gravity * delta#aplicando a gravidade
 	if $ceilingcast.is_colliding():#detecta se o player esta no teto
-		_velocity.y = 10#se o player estiver no teto ele ganha velocidade em y para cair e nao grudar la
+		_velocity.y = 20 #max(_velocity.y, -_velocity.y) * 0.3#se o player estiver no teto ele ganha velocidade em y para cair e nao grudar la
 	elif is_on_wall():#bounce bounce (on walls)
 		_velocity.x *= -0.3#coeficiente de bounce
 		enable_mov = true#quando o player bate na parede, ele ganha o comando de volta
