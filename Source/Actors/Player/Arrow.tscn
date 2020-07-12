@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Source/Actors/Player/Arrow.gd" type="Script" id=1]
+[ext_resource path="res://Assets/arrow-sheet.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 12, 5 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 12, 0, 12, 5 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "spin",
+"speed": 8.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 0.889495, 0.995486 )
+
+[node name="Arrow" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="ArrowAnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 3 )
+animation = "spin"
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 4.56579, 0.442227 )
+shape = SubResource( 4 )

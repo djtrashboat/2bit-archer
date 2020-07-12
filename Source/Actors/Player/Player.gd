@@ -1,7 +1,14 @@
 extends "res://Source/Actors/Actor.gd"
 
+onready var ArrowNode := get_node("Arrow")
+
 var global_position_i: Vector2#guarda a posicao do clique do mouse
 var global_position_f: Vector2#guarda a posicao de quando solta o mouse
+var global_arrow_position_i: Vector2
+var global_arrow_position_f: Vector2
+var arrow_angle: float
+
+
 var enable_mov: bool #se true o player pode comandar o personagem
 var populo: bool = false
 var mousehold: bool = false
@@ -17,12 +24,16 @@ func _physics_process(delta: float) -> void:
 	if enable_mov:#os comandos so funcionam se enablemov for true
 		_get_input()
 	move_and_slide(_velocity * max_speed)#vrummmm
+	
+	
+	
+	
 	#if !populo:
 	#	play_animation(_velocity)#toca animacao
 	
-func calculate_impulse() -> Vector2:#calcula o impulso a partir das cordenadas do mouse
+func calculate_impulse(vi: Vector2, vf: Vector2) -> Vector2:#calcula o impulso a partir das cordenadas do mouse
 	var impulse: Vector2
-	impulse = (global_position_i - global_position_f)
+	impulse = (vi - vf)
 	return impulse
 
 func _get_input():
@@ -34,12 +45,29 @@ func _get_input():
 	if Input.is_action_just_released("click_right"):#guarda a posicao de quando solta o mouse
 		#global_position_f = get_global_mouse_position()
 		global_position_f = get_viewport().get_mouse_position()
-		_velocity = calculate_impulse()#aplica o impulso a velocidade assim que o player solta o mouse 
+		_velocity = calculate_impulse(global_position_i, global_position_f)#aplica o impulso a velocidade assim que o player solta o mouse 
 		enable_mov = false#assim que o player aplica o impulso, ele perde o controle do personagem
 		#$Camera2D/ScreenShake/Frequency.stop()
 		mousehold = false
 		populo = false
-
+	if Input.is_action_just_pressed("click_left"):
+		global_arrow_position_i = get_viewport().get_mouse_position()
+		mousehold = true
+		var point: Vector2
+		point.x = 0
+		point.y = 0
+		arrow_angle = global_arrow_position_i.angle_to_point(point)
+	if Input.is_action_just_released("click_left"):
+		global_arrow_position_f = get_viewport().get_mouse_position()
+		_arrow_velocity = calculate_impulse(global_arrow_position_i, global_arrow_position_f)
+		launch_arrow(arrow_angle)
+		
+		
+func launch_arrow(angle: float) -> void:
+		ArrowNode.visible = true
+		
+	
+	
 func _update():
 	if !mousehold:
 		play_animation(_velocity)
