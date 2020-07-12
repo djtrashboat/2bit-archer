@@ -50,6 +50,7 @@ func _get_input():
 		#$Camera2D/ScreenShake/Frequency.stop()
 		mousehold = false
 		populo = false
+#************************
 	if Input.is_action_just_pressed("click_left"):
 		global_arrow_position_i = get_viewport().get_mouse_position()
 		mousehold = true

@@ -28,7 +28,7 @@ script = ExtResource( 1 )
 [node name="ArrowAnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 3 )
 animation = "spin"
-frame = 1
+playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 4.56579, 0.442227 )
