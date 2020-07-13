@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 	if enable_mov:#os comandos so funcionam se enablemov for true
 		_get_input()
 	move_and_slide(_velocity * _speed)#vrummmm
-	_get_arrow_strength()
+	_get_arrow_strength()#chama o input da flecha
 
 
 func _get_input():
@@ -40,13 +40,12 @@ func _get_input():
 		populo = false
 
 
-func _get_arrow_strength():
+func _get_arrow_strength():#pega o input do mouse_left e guarda as variaveis
 	if Input.is_action_just_pressed("click_left"):#guarda a posicao do clique do mouse
-		arrow_position_i = get_global_mouse_position()
-		#arrow_position_i = get_viewport().get_mouse_position()
+		arrow_position_i = get_viewport().get_mouse_position()
 	if Input.is_action_just_released("click_left"):#guarda a posicao de quando solta o mouse
-		arrow_position_f = get_global_mouse_position()
-		spawn_arrow()
+		arrow_position_f = get_viewport().get_mouse_position()
+		spawn_arrow()#arrow goes woosh
 
 
 
@@ -61,10 +60,9 @@ func _update():
 func _process(delta: float) -> void:
 	_update()
 
-func spawn_arrow():
-	print("spawn_arrow")
+func spawn_arrow():#woosh the arrow
 	add_child(Arrow_Projectile.instance())
-	$Arrow.launch_arrow(arrow_position_i - arrow_position_f)
+	$Arrow.launch_arrow(arrow_position_i - arrow_position_f)#chama launch arrow do outro script
 
 func play_animation(velocity: Vector2) -> void:#toca animacao
 	if is_on_wall():# and (velocity.x< (0.1) or velocity.x> (-0.1)):# ***o player detecta o chao como parede***, #sem a segudanda parte ele ficava girando o sprite sem parar

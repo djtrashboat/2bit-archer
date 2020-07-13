@@ -466,29 +466,28 @@ script = ExtResource( 6 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="arrows"]
 position = Vector2( 158.252, -46.7982 )
 frames = SubResource( 43 )
-frame = 1
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="arrows"]
 position = Vector2( 231.892, -269.045 )
 frames = SubResource( 43 )
-frame = 1
 playing = true
 flip_h = true
 
 [node name="AnimatedSprite3" type="AnimatedSprite" parent="arrows"]
 position = Vector2( -159.187, -321.775 )
 frames = SubResource( 43 )
-frame = 1
 playing = true
 
 [node name="UpperArrow" type="AnimatedSprite" parent="arrows"]
 position = Vector2( 329.414, -117.326 )
 frames = SubResource( 46 )
+frame = 1
 playing = true
 
 [node name="UpperArrow2" type="AnimatedSprite" parent="arrows"]
 position = Vector2( 38.8077, -270.751 )
 rotation = -1.5708
 frames = SubResource( 46 )
+frame = 1
 playing = true
