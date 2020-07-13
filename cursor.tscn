@@ -4,6 +4,7 @@
 [ext_resource path="res://Assets/cursor-sheet.png" type="Texture" id=3]
 
 [node name="Node2D" type="Node2D"]
+modulate = Color( 0.592157, 0.854902, 0.454902, 1 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

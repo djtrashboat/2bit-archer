@@ -16,8 +16,8 @@ func _process(delta: float) -> void:
 		_ditch_line()
 	if Input.is_action_just_pressed("click_left"):
 		var color: Color
-		color.r = 0
-		color.g = 232
+		color.r = 151
+		color.g = 218
 		color.b = 255
 		_drawline(color)
 	if Input.is_action_just_released("click_left"):

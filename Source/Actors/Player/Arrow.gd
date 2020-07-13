@@ -11,10 +11,10 @@ export (NodePath) var entity_path = ".."
 onready var ArrowNode = get_node(entity_path)
 
 func _ready() -> void:
+	hide()
 	set_physics_process(false) #ele inicia sem processo de fisica (ate ser ligado em launch())
 
 func _physics_process(delta: float) -> void:
-	#move_and_collide(_velocity * _speed *delta)
 	if move_and_collide(_velocity *delta):#arrow goes vrummmm e retorna 1 se colidir
 		_on_impact()
 	else:
@@ -30,6 +30,7 @@ func launch_arrow(strength: Vector2) -> void:
 	global_transform = temp#posicao dela eh a posicao que foi guardada antes
 	position.y -= 6 #pra nao soltar flecha do pe
 	_velocity = strength * _speed
+	show()
 	set_physics_process(true)#inicia o processo de fisica
 
 func _on_impact(): #quando a flecha bate, para de tocar animacao e de ter fisica
