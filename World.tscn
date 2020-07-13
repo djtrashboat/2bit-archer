@@ -436,7 +436,6 @@ __meta__ = {
 position = Vector2( 32.9597, 41.3584 )
 collision_mask = 8
 gravity = 200.0
-max_speed = Vector2( 3, 3 )
 
 [node name="Light2D" type="Light2D" parent="Player"]
 visible = false

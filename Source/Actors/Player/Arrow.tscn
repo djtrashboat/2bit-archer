@@ -23,11 +23,15 @@ animations = [ {
 extents = Vector2( 0.889495, 0.995486 )
 
 [node name="Arrow" type="KinematicBody2D"]
+collision_mask = 10
 script = ExtResource( 1 )
+gravity = 200.0
+_speed = Vector2( 3, 3 )
 
 [node name="ArrowAnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 3 )
 animation = "spin"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -3,8 +3,10 @@ extends "res://Source/Actors/Actor.gd"
 
 var global_position_i: Vector2#guarda a posicao do clique do mouse
 var global_position_f: Vector2#guarda a posicao de quando solta o mouse
-var arrow_angle: float
-
+var arrow_position_i: Vector2#guarda a posicao do clique do mouse
+var arrow_position_f: Vector2#guarda a posicao de quando solta o mouse
+#var arrow_angle: float
+const Arrow_Projectile = preload("res://Source/Actors/Player/Arrow.tscn")
 
 var enable_mov: bool #se true o player pode comandar o personagem
 var populo: bool = false
@@ -20,33 +22,33 @@ func _physics_process(delta: float) -> void:
 		enable_mov = true#quando o player bate na parede, ele ganha o comando de volta
 	if enable_mov:#os comandos so funcionam se enablemov for true
 		_get_input()
-	move_and_slide(_velocity * max_speed)#vrummmm
-	
-	
-	
-	
-	#if !populo:
-	#	play_animation(_velocity)#toca animacao
-	
+	move_and_slide(_velocity * _speed)#vrummmm
+	_get_arrow_strength()
 
 
 func _get_input():
 	if Input.is_action_just_pressed("click_right"):#guarda a posicao do clique do mouse
 		#global_position_i = get_global_mouse_position()
 		global_position_i = get_viewport().get_mouse_position()
-		#$AnimatedSprite.play("populo")
 		mousehold = true
 	if Input.is_action_just_released("click_right"):#guarda a posicao de quando solta o mouse
 		#global_position_f = get_global_mouse_position()
 		global_position_f = get_viewport().get_mouse_position()
 		_velocity = calculate_impulse(global_position_i, global_position_f)#aplica o impulso a velocidade assim que o player solta o mouse 
 		enable_mov = false#assim que o player aplica o impulso, ele perde o controle do personagem
-		#$Camera2D/ScreenShake/Frequency.stop()
 		mousehold = false
 		populo = false
-#************************
-		
-		
+
+
+func _get_arrow_strength():
+	if Input.is_action_just_pressed("click_left"):#guarda a posicao do clique do mouse
+		arrow_position_i = get_global_mouse_position()
+		#arrow_position_i = get_viewport().get_mouse_position()
+	if Input.is_action_just_released("click_left"):#guarda a posicao de quando solta o mouse
+		arrow_position_f = get_global_mouse_position()
+		spawn_arrow()
+
+
 
 func _update():
 	if !mousehold:
@@ -58,6 +60,11 @@ func _update():
 
 func _process(delta: float) -> void:
 	_update()
+
+func spawn_arrow():
+	print("spawn_arrow")
+	add_child(Arrow_Projectile.instance())
+	$Arrow.launch_arrow(arrow_position_i - arrow_position_f)
 
 func play_animation(velocity: Vector2) -> void:#toca animacao
 	if is_on_wall():# and (velocity.x< (0.1) or velocity.x> (-0.1)):# ***o player detecta o chao como parede***, #sem a segudanda parte ele ficava girando o sprite sem parar
