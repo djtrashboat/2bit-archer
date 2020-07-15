@@ -19,8 +19,7 @@ func _physics_process(delta: float) -> void:
 		_on_impact()
 	else:
 		rotation = _velocity.angle()
-		_velocity.y += gravity * delta #aplicando a gravidade
-	#*************rotated() <-------- tem que aprender como funciona e aplicar
+		_velocity.y += gravity * 1.5 * delta #aplicando a gravidade
 
 func launch_arrow(strength: Vector2) -> void:
 	var temp = global_transform#guarda a posicao

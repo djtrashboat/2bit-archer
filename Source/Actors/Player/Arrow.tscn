@@ -3,32 +3,32 @@
 [ext_resource path="res://Source/Actors/Player/Arrow.gd" type="Script" id=1]
 [ext_resource path="res://Assets/arrow-sheet.png" type="Texture" id=2]
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
 region = Rect2( 24, 0, 12, 5 )
 
-[sub_resource type="AtlasTexture" id=1]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 12, 5 )
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
 region = Rect2( 12, 0, 12, 5 )
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ SubResource( 5 ) ],
+"frames": [ SubResource( 1 ) ],
 "loop": false,
 "name": "stop",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ) ],
 "loop": true,
 "name": "spin",
 "speed": 8.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 5, 0.995486 )
 
 [node name="Arrow" type="KinematicBody2D"]
@@ -38,9 +38,9 @@ gravity = 200.0
 _speed = Vector2( 3, 3 )
 
 [node name="ArrowAnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 3 )
+frames = SubResource( 4 )
 animation = "spin"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1, 0 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )

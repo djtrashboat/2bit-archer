@@ -4,10 +4,10 @@
 [ext_resource path="res://Assets/tileset.png" type="Texture" id=2]
 [ext_resource path="res://Assets/bg.png" type="Texture" id=3]
 [ext_resource path="res://cursor.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/radial_gradient.png" type="Texture" id=5]
 [ext_resource path="res://Source/drawline.gd" type="Script" id=6]
 [ext_resource path="res://Assets/pointing-arrow.png" type="Texture" id=7]
 [ext_resource path="res://Assets/upper-arrow.png" type="Texture" id=8]
+[ext_resource path="res://Source/Actors/Slime.tscn" type="PackedScene" id=9]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -437,13 +437,6 @@ position = Vector2( 32.9597, 41.3584 )
 collision_mask = 8
 gravity = 200.0
 
-[node name="Light2D" type="Light2D" parent="Player"]
-visible = false
-texture = ExtResource( 5 )
-texture_scale = 0.3
-color = Color( 0.670588, 0.329412, 0.690196, 1 )
-shadow_enabled = true
-
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 40 )
 cell_size = Vector2( 16, 16 )
@@ -466,28 +459,33 @@ script = ExtResource( 6 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="arrows"]
 position = Vector2( 158.252, -46.7982 )
 frames = SubResource( 43 )
+frame = 1
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="arrows"]
 position = Vector2( 231.892, -269.045 )
 frames = SubResource( 43 )
+frame = 1
 playing = true
 flip_h = true
 
 [node name="AnimatedSprite3" type="AnimatedSprite" parent="arrows"]
 position = Vector2( -159.187, -321.775 )
 frames = SubResource( 43 )
+frame = 1
 playing = true
 
 [node name="UpperArrow" type="AnimatedSprite" parent="arrows"]
 position = Vector2( 329.414, -117.326 )
 frames = SubResource( 46 )
-frame = 1
 playing = true
 
 [node name="UpperArrow2" type="AnimatedSprite" parent="arrows"]
 position = Vector2( 38.8077, -270.751 )
 rotation = -1.5708
 frames = SubResource( 46 )
-frame = 1
 playing = true
+
+[node name="Slime" parent="." instance=ExtResource( 9 )]
+position = Vector2( 105.3, 9.79405 )
+directionfrequency = 2
