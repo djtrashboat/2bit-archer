@@ -14,10 +14,7 @@ func _jump():
 	_velocity = -_speed * 8
 	_velocity.x *= initial_direction
 	changedirectionin -= 1
-	print("_jump")
-	print("changedir==", changedirectionin)
 	if changedirectionin == 0:
-		print("direction change")
 		initial_direction *= -1
 		changedirectionin = directionfrequency
 
@@ -32,5 +29,4 @@ func _ready():
 	changedirectionin = directionfrequency
 
 func _on_Timer_timeout() -> void:
-	print("timeout")
 	_jump()

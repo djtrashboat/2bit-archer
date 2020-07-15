@@ -32,9 +32,8 @@ animations = [ {
 extents = Vector2( 5, 0.995486 )
 
 [node name="Arrow" type="KinematicBody2D"]
-collision_mask = 10
+collision_mask = 8
 script = ExtResource( 1 )
-gravity = 200.0
 _speed = Vector2( 3, 3 )
 
 [node name="ArrowAnimatedSprite" type="AnimatedSprite" parent="."]
@@ -44,3 +43,7 @@ animation = "spin"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1, 0 )
 shape = SubResource( 5 )
+
+[node name="qfreetimer" type="Timer" parent="."]
+wait_time = 2.0
+[connection signal="timeout" from="qfreetimer" to="." method="_on_qfreetimer_timeout"]
