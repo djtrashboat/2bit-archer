@@ -30,3 +30,8 @@ func _ready():
 
 func _on_Timer_timeout() -> void:
 	_jump()
+
+
+func _on_Arrow_detector_area_entered(area: Area2D) -> void:
+	if area.name == "ArrowCol":
+		queue_free()

@@ -38,6 +38,4 @@ func _on_impact(): #quando a flecha bate, para de tocar animacao e de ter fisica
 	$ArrowAnimatedSprite.stop()
 	$qfreetimer.start()
 	set_physics_process(false)#desliga a fisica
-
-func _on_qfreetimer_timeout() -> void:
-	queue_free()
+	$ArrowCol.queue_free()

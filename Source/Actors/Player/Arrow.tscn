@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Source/Actors/Player/Arrow.gd" type="Script" id=1]
 [ext_resource path="res://Assets/arrow-sheet.png" type="Texture" id=2]
@@ -31,6 +31,9 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 5, 0.995486 )
 
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 4, 4 )
+
 [node name="Arrow" type="KinematicBody2D"]
 collision_mask = 8
 script = ExtResource( 1 )
@@ -46,4 +49,11 @@ shape = SubResource( 5 )
 
 [node name="qfreetimer" type="Timer" parent="."]
 wait_time = 2.0
+
+[node name="ArrowCol" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArrowCol"]
+modulate = Color( 0.454902, 0.462745, 1, 1 )
+position = Vector2( 3, 0 )
+shape = SubResource( 6 )
 [connection signal="timeout" from="qfreetimer" to="." method="_on_qfreetimer_timeout"]

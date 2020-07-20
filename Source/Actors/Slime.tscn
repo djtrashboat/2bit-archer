@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Slime.gd" type="Script" id=1]
+[ext_resource path="res://Source/Actors/Slime.gd" type="Script" id=1]
 [ext_resource path="res://Assets/slime.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=1]
@@ -22,6 +22,9 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 4, 3 )
 
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 5, 7 )
+
 [node name="Slime" type="KinematicBody2D"]
 collision_layer = 2
 collision_mask = 8
@@ -33,10 +36,20 @@ frames = SubResource( 3 )
 frame = 1
 playing = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="SlimeBody" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 3 )
 shape = SubResource( 4 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.5
+
+[node name="Arrow_detector" type="Area2D" parent="."]
+position = Vector2( 0, -3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arrow_detector"]
+modulate = Color( 0.639216, 0.588235, 0.933333, 1 )
+position = Vector2( 0, 4 )
+rotation = -1.5708
+shape = SubResource( 5 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="area_entered" from="Arrow_detector" to="." method="_on_Arrow_detector_area_entered"]

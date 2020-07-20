@@ -98,3 +98,7 @@ func play_animation(velocity: Vector2) -> void:#toca animacao
 			if enable_mov:
 				$AnimatedSprite.play("jump_1")
 			else: $AnimatedSprite.play("jump_0")
+
+
+func _on_EnemyDetector_body_entered(body: Node) -> void:
+	queue_free()
