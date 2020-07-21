@@ -11,6 +11,7 @@ export (NodePath) var entity_path = ".."
 onready var ArrowNode = get_node(entity_path)
 
 func _ready() -> void:
+	#set_process(false)
 	hide()
 	set_physics_process(false) #ele inicia sem processo de fisica (ate ser ligado em launch())
 
@@ -22,6 +23,7 @@ func _physics_process(delta: float) -> void:
 		_velocity.y += gravity * 1.5 * delta #aplicando a gravidade
 
 func launch_arrow(strength: Vector2) -> void:
+	#set_process(true)
 	var temp = global_transform#guarda a posicao
 	var scene = get_tree().current_scene#store a cena
 	get_parent().remove_child(self)#player deixa de ser pai
@@ -39,3 +41,8 @@ func _on_impact(): #quando a flecha bate, para de tocar animacao e de ter fisica
 	$qfreetimer.start()
 	set_physics_process(false)#desliga a fisica
 	$ArrowCol.queue_free()
+
+
+func _on_ArrowCol_area_entered(area: Area2D) -> void:
+	if area.name == "Arrow_detector":
+		queue_free()

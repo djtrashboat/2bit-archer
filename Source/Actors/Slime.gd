@@ -3,6 +3,7 @@ extends "res://Source/Actors/enemy.gd"
 export var directionfrequency: int = 5
 var changedirectionin: int
 export var initial_direction: int = 1
+export var jump_timer = 2.0
 
 func _physics_process(delta: float) -> void:
 	_velocity.y += gravity * delta
@@ -25,6 +26,7 @@ func _update():
 	pass
 
 func _ready():
+	$Timer.wait_time = jump_timer
 	$Timer.start()
 	changedirectionin = directionfrequency
 
