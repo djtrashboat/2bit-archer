@@ -43,6 +43,6 @@ func _on_impact(): #quando a flecha bate, para de tocar animacao e de ter fisica
 	$ArrowCol.queue_free()
 
 
-func _on_ArrowCol_area_entered(area: Area2D) -> void:
+func _on_ArrowCol_area_entered(area: Area2D) -> void:#quando a flecha bate no slime, ela some
 	if area.name == "Arrow_detector":
 		queue_free()
