@@ -489,7 +489,6 @@ playing = true
 [node name="Slime" parent="." instance=ExtResource( 9 )]
 position = Vector2( 105.3, 9.79405 )
 directionfrequency = 2
-jump_timer = 1.0
 
 [node name="Slime2" parent="." instance=ExtResource( 9 )]
 position = Vector2( 310.09, -70.878 )
@@ -503,4 +502,3 @@ jump_timer = 0.7
 [node name="Slime4" parent="." instance=ExtResource( 9 )]
 position = Vector2( -180.024, -310.168 )
 directionfrequency = 1
-jump_timer = 1.0

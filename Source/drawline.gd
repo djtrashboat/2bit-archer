@@ -6,8 +6,10 @@ var mouse_position_i: Vector2 #guarda a posicao do clique do mouse na janela
 var arrow_color: Color
 
 func _ready():
-	_end_line()
-	set_process(false)
+	global_position_i = get_viewport().get_mouse_position()
+	#_end_line()
+	#set_process(false)
+
 
 func _ready_to_draw(color: Color):
 	#global_position_i = get_global_mouse_position()

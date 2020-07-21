@@ -3,8 +3,8 @@ extends "res://Source/Actors/Actor.gd"
 
 var global_position_i: Vector2#guarda a posicao do clique do mouse
 var global_position_f: Vector2#guarda a posicao de quando solta o mouse
-var arrow_position_i: Vector2#guarda a posicao do clique do mouse
-var arrow_position_f: Vector2#guarda a posicao de quando solta o mouse
+onready var arrow_position_i: Vector2 = get_viewport().get_mouse_position()#guarda a posicao do clique do mouse
+onready var arrow_position_f: Vector2 = get_viewport().get_mouse_position()#guarda a posicao de quando solta o mouse
 #var arrow_angle: float
 const Arrow_Projectile = preload("res://Source/Actors/Player/Arrow.tscn")
 
