@@ -12,7 +12,10 @@ onready var ArrowNode = get_node(entity_path)
 
 func _ready() -> void:
 	#set_process(false)
-	hide()
+	#hide()
+	#set_global_position(global_position_i - global_position_i)
+	position.x = 420.0
+	position.y = -610.0
 	set_physics_process(false) #ele inicia sem processo de fisica (ate ser ligado em launch())
 
 func _physics_process(delta: float) -> void:
@@ -31,7 +34,7 @@ func launch_arrow(strength: Vector2) -> void:
 	global_transform = temp#posicao dela eh a posicao que foi guardada antes
 	position.y -= 6 #pra nao soltar flecha do pe
 	_velocity = strength * _speed
-	show()
+	#show()
 	set_physics_process(true)#inicia o processo de fisica
 
 func _on_impact(): #quando a flecha bate, para de tocar animacao e de ter fisica
@@ -46,3 +49,6 @@ func _on_impact(): #quando a flecha bate, para de tocar animacao e de ter fisica
 func _on_ArrowCol_area_entered(area: Area2D) -> void:#quando a flecha bate no slime, ela some
 	if area.name == "Arrow_detector":
 		queue_free()
+
+func _set_pos(new_pos: Vector2):
+	set_global_position(new_pos)

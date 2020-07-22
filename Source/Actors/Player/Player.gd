@@ -62,6 +62,7 @@ func _process(delta: float) -> void:
 
 func spawn_arrow():#woosh the arrow
 	add_child(Arrow_Projectile.instance())
+	$Arrow._set_pos(global_position)
 	$Arrow.launch_arrow(arrow_position_i - arrow_position_f)#chama launch arrow do outro script
 
 func play_animation(velocity: Vector2) -> void:#toca animacao
