@@ -14,7 +14,7 @@ dest_files=[ "res://.import/upper-arrow.png-cf21262a66d426413272fffa8dd07150.ste
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

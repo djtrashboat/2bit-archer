@@ -14,7 +14,7 @@ dest_files=[ "res://.import/bownarrow.png-62c1f65a14b8b6ac6a0e62cb7fe19aad.stex"
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

@@ -5,13 +5,13 @@ var global_position_i: Vector2#guarda a posicao do clique do mouse
 var global_position_f: Vector2#guarda a posicao de quando solta o mouse
 onready var arrow_position_i: Vector2 = get_viewport().get_mouse_position()#guarda a posicao do clique do mouse
 onready var arrow_position_f: Vector2 = get_viewport().get_mouse_position()#guarda a posicao de quando solta o mouse
-#var arrow_angle: float
 const Arrow_Projectile = preload("res://Source/Actors/Player/Arrow.tscn")
 
 var enable_mov: bool #se true o player pode comandar o personagem
 var populo: bool = false
 var mousehold: bool = false
 var mouserelease: bool = false
+var is_shielded: bool = false
 
 func _physics_process(delta: float) -> void:
 	_velocity.y += gravity * delta#aplicando a gravidade
@@ -43,8 +43,10 @@ func _get_input():
 func _get_arrow_strength():#pega o input do mouse_left e guarda as variaveis
 	if Input.is_action_just_pressed("click_left"):#guarda a posicao do clique do mouse
 		arrow_position_i = get_viewport().get_mouse_position()
+		$bownarrow.show()
 	if Input.is_action_just_released("click_left"):#guarda a posicao de quando solta o mouse
 		arrow_position_f = get_viewport().get_mouse_position()
+		$bownarrow.hide()
 		spawn_arrow()#arrow goes woosh
 
 
@@ -56,6 +58,7 @@ func _update():
 	else:
 		$Camera2D/ScreenShake.start()
 		$AnimatedSprite.play("populo")
+	$bownarrow.rotation = (arrow_position_i - get_viewport().get_mouse_position()).angle()
 
 func _process(delta: float) -> void:
 	_update()
@@ -102,4 +105,15 @@ func play_animation(velocity: Vector2) -> void:#toca animacao
 
 
 func _on_EnemyDetector_body_entered(body: Node) -> void:
-	queue_free()
+	print("oof")
+	if is_shielded:
+		is_shielded = false
+		$shield.hide()
+	else:
+		queue_free()
+
+
+func _on_pickuper_area_entered(area: Area2D) -> void:
+	if area.name == "pickup_shield":
+		is_shielded = true
+		$shield.show()

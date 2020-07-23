@@ -14,7 +14,7 @@ dest_files=[ "res://.import/slime.png-3ec58f43c16f73dc506331217e4bd7a8.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

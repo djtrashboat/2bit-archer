@@ -14,7 +14,7 @@ dest_files=[ "res://.import/2bitarcher-sheet.png-96fd7f4b87812560426ae064a3f821e
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
