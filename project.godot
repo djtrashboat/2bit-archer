@@ -73,7 +73,7 @@ click_left={
 
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Enemy"
-2d_physics/layer_3="Coins"
+2d_physics/layer_3="power_ups"
 2d_physics/layer_4="World"
 2d_physics/layer_5="Arrow"
 

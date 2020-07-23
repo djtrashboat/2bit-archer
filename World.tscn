@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/tileset.png" type="Texture" id=2]
 [ext_resource path="res://Assets/bg.png" type="Texture" id=3]
 [ext_resource path="res://cursor.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Source/powerups/powerup_shield.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Source/powerups/powerup_wing.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Source/drawline.gd" type="Script" id=6]
 [ext_resource path="res://Assets/pointing-arrow.png" type="Texture" id=7]
 [ext_resource path="res://Assets/upper-arrow.png" type="Texture" id=8]
@@ -473,36 +473,37 @@ jump_timer = 0.7
 position = Vector2( -180.024, -310.168 )
 directionfrequency = 1
 
-[node name="shield" parent="." instance=ExtResource( 5 )]
-position = Vector2( 128.398, 21.7008 )
-
 [node name="arrows" type="Node" parent="."]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="arrows"]
 position = Vector2( 158.252, -46.7982 )
 frames = SubResource( 43 )
+frame = 1
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="arrows"]
 position = Vector2( 231.892, -269.045 )
 frames = SubResource( 43 )
+frame = 1
 playing = true
 flip_h = true
 
 [node name="AnimatedSprite3" type="AnimatedSprite" parent="arrows"]
 position = Vector2( -159.187, -321.775 )
 frames = SubResource( 43 )
+frame = 1
 playing = true
 
 [node name="UpperArrow" type="AnimatedSprite" parent="arrows"]
 position = Vector2( 329.414, -117.326 )
 frames = SubResource( 46 )
-frame = 1
 playing = true
 
 [node name="UpperArrow2" type="AnimatedSprite" parent="arrows"]
 position = Vector2( 38.8077, -270.751 )
 rotation = -1.5708
 frames = SubResource( 46 )
-frame = 1
 playing = true
+
+[node name="powerup_wing" parent="." instance=ExtResource( 5 )]
+position = Vector2( 69.7887, 38.7976 )

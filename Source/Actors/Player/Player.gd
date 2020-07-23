@@ -12,6 +12,8 @@ var populo: bool = false
 var mousehold: bool = false
 var mouserelease: bool = false
 var is_shielded: bool = false
+var is_winged: bool = false
+var extra_jump: bool = false
 
 func _physics_process(delta: float) -> void:
 	_velocity.y += gravity * delta#aplicando a gravidade
@@ -20,6 +22,8 @@ func _physics_process(delta: float) -> void:
 	elif is_on_wall():#bounce bounce (on walls)
 		_velocity.x *= -0.3#coeficiente de bounce
 		enable_mov = true#quando o player bate na parede, ele ganha o comando de volta
+		if is_winged:
+			extra_jump = true
 	if enable_mov:#os comandos so funcionam se enablemov for true
 		_get_input()
 	move_and_slide(_velocity * _speed)#vrummmm
@@ -35,7 +39,10 @@ func _get_input():
 		#global_position_f = get_global_mouse_position()
 		global_position_f = get_viewport().get_mouse_position()
 		_velocity = calculate_impulse(global_position_i, global_position_f)#aplica o impulso a velocidade assim que o player solta o mouse 
-		enable_mov = false#assim que o player aplica o impulso, ele perde o controle do personagem
+		if extra_jump:
+			extra_jump = false
+		else:
+			enable_mov = false#assim que o player aplica o impulso, ele perde o controle do personagem
 		mousehold = false
 		populo = false
 
@@ -105,14 +112,21 @@ func play_animation(velocity: Vector2) -> void:#toca animacao
 
 
 func _on_EnemyDetector_body_entered(body: Node) -> void:
-	if is_shielded:
+	if is_winged:
+		is_winged = false
+		extra_jump = false
+		$wings.hide()
+	elif is_shielded:
 		is_shielded = false
 		$bubble.hide()
 	else:
 		queue_free()
 
-
 func _on_pickuper_area_entered(area: Area2D) -> void:
 	if area.name == "pickup_shield":
 		is_shielded = true
 		$bubble.show()
+	if area.name == "pickup_wing":
+		is_winged = true
+		extra_jump = true
+		$wings.show()
