@@ -105,10 +105,9 @@ func play_animation(velocity: Vector2) -> void:#toca animacao
 
 
 func _on_EnemyDetector_body_entered(body: Node) -> void:
-	print("oof")
 	if is_shielded:
 		is_shielded = false
-		$shield.hide()
+		$bubble.hide()
 	else:
 		queue_free()
 
@@ -116,4 +115,4 @@ func _on_EnemyDetector_body_entered(body: Node) -> void:
 func _on_pickuper_area_entered(area: Area2D) -> void:
 	if area.name == "pickup_shield":
 		is_shielded = true
-		$shield.show()
+		$bubble.show()
