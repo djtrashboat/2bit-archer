@@ -14,6 +14,7 @@ var mouserelease: bool = false
 var is_shielded: bool = false
 var is_winged: bool = false
 var extra_jump: bool = false
+var can_shoot: bool = true
 
 func _physics_process(delta: float) -> void:
 	_velocity.y += gravity * delta#aplicando a gravidade
@@ -27,6 +28,7 @@ func _physics_process(delta: float) -> void:
 	if enable_mov:#os comandos so funcionam se enablemov for true
 		_get_input()
 	move_and_slide(_velocity * _speed)#vrummmm
+	#if can_shoot:
 	_get_arrow_strength()#chama o input da flecha
 
 
@@ -54,7 +56,10 @@ func _get_arrow_strength():#pega o input do mouse_left e guarda as variaveis
 	if Input.is_action_just_released("click_left"):#guarda a posicao de quando solta o mouse
 		arrow_position_f = get_viewport().get_mouse_position()
 		$bownarrow.hide()
-		spawn_arrow()#arrow goes woosh
+		if can_shoot:
+			spawn_arrow()#arrow goes woosh
+			can_shoot = false
+			$arrow_delay.start()
 
 
 
@@ -76,6 +81,10 @@ func spawn_arrow():#woosh the arrow
 	$Arrow.launch_arrow(arrow_position_i - arrow_position_f)#chama launch arrow do outro script
 
 func play_animation(velocity: Vector2) -> void:#toca animacao
+	if can_shoot:
+		$bownarrow.frame = 0
+	else:
+		$bownarrow.frame = 1
 	if is_on_wall():# and (velocity.x< (0.1) or velocity.x> (-0.1)):# ***o player detecta o chao como parede***, #sem a segudanda parte ele ficava girando o sprite sem parar
 		$AnimatedSprite.play("idle")
 	elif velocity.y > 0.0:
@@ -120,7 +129,8 @@ func _on_EnemyDetector_body_entered(body: Node) -> void:
 		is_shielded = false
 		$bubble.hide()
 	else:
-		queue_free()
+		position.x = 33
+		position.y = 64
 
 func _on_pickuper_area_entered(area: Area2D) -> void:
 	if area.name == "pickup_shield":
@@ -130,3 +140,7 @@ func _on_pickuper_area_entered(area: Area2D) -> void:
 		is_winged = true
 		extra_jump = true
 		$wings.show()
+
+
+func _on_arrow_delay_timeout() -> void:
+	can_shoot = true

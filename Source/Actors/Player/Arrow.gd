@@ -41,9 +41,9 @@ func _on_impact(): #quando a flecha bate, para de tocar animacao e de ter fisica
 	#_velocity *= 0
 	$ArrowAnimatedSprite.play("stop")
 	$ArrowAnimatedSprite.stop()
-	$qfreetimer.start()
 	set_physics_process(false)#desliga a fisica
 	$ArrowCol.queue_free()
+	#$qfreetimer.start()
 
 
 func _on_ArrowCol_area_entered(area: Area2D) -> void:#quando a flecha bate no slime, ela some
