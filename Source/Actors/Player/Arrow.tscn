@@ -48,14 +48,10 @@ animation = "spin"
 position = Vector2( 1, 0 )
 shape = SubResource( 5 )
 
-[node name="qfreetimer" type="Timer" parent="."]
-wait_time = 2.0
-
 [node name="ArrowCol" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ArrowCol"]
 modulate = Color( 0.454902, 0.462745, 1, 1 )
 position = Vector2( 3, 0 )
 shape = SubResource( 6 )
-[connection signal="timeout" from="qfreetimer" to="." method="_on_qfreetimer_timeout"]
 [connection signal="area_entered" from="ArrowCol" to="." method="_on_ArrowCol_area_entered"]

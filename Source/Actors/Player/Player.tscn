@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/2bitarcher-sheet.png" type="Texture" id=2]
 [ext_resource path="res://Source/ScreenShake.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Source/Actors/Player/Arrow.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/bownarrow.png" type="Texture" id=5]
+[ext_resource path="res://Assets/bownarrow-sheet.png" type="Texture" id=5]
 [ext_resource path="res://Assets/wing_sheet.png" type="Texture" id=6]
 [ext_resource path="res://Assets/shield_bubble-sheet.png" type="Texture" id=7]
 
@@ -34,19 +34,19 @@ region = Rect2( 112, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 2 )
-region = Rect2( 64, 0, 16, 16 )
+region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 2 )
-region = Rect2( 80, 0, 16, 16 )
+region = Rect2( 48, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 2 )
-region = Rect2( 32, 0, 16, 16 )
+region = Rect2( 64, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 2 )
-region = Rect2( 48, 0, 16, 16 )
+region = Rect2( 80, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 2 )
@@ -83,12 +83,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
-"name": "jump_1",
+"name": "jump_0",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
-"name": "jump_0",
+"name": "jump_1",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
@@ -204,18 +204,6 @@ cast_to = Vector2( 0, 8 )
 collision_mask = 8
 collide_with_areas = true
 
-[node name="Arrow" parent="." instance=ExtResource( 4 )]
-position = Vector2( 0, -8 )
-gravity = 400.0
-_speed = Vector2( 10, 10 )
-
-[node name="bownarrow" type="Sprite" parent="."]
-visible = false
-position = Vector2( 0, -6 )
-texture = ExtResource( 5 )
-centered = false
-offset = Vector2( 7, -7 )
-
 [node name="EnemyDetector" type="Area2D" parent="."]
 visible = false
 position = Vector2( 1, -16 )
@@ -238,7 +226,6 @@ shape = SubResource( 18 )
 visible = false
 position = Vector2( 0, -8 )
 frames = SubResource( 27 )
-frame = 4
 playing = true
 
 [node name="wings" type="AnimatedSprite" parent="."]
@@ -246,5 +233,23 @@ visible = false
 position = Vector2( 0, -23 )
 frames = SubResource( 32 )
 frame = 1
+
+[node name="bownarrow" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, -6 )
+texture = ExtResource( 5 )
+centered = false
+offset = Vector2( 7, -7 )
+hframes = 2
+
+[node name="Arrow" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, -8 )
+gravity = 400.0
+_speed = Vector2( 10, 10 )
+
+[node name="arrow_delay" type="Timer" parent="."]
+wait_time = 0.75
+one_shot = true
 [connection signal="body_entered" from="EnemyDetector" to="." method="_on_EnemyDetector_body_entered"]
 [connection signal="area_entered" from="pickuper" to="." method="_on_pickuper_area_entered"]
+[connection signal="timeout" from="arrow_delay" to="." method="_on_arrow_delay_timeout"]
