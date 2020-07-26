@@ -120,6 +120,7 @@ func _on_EnemyDetector_body_entered(body: Node) -> void:
 		is_shielded = false
 		$bubble.hide()
 	else:
+		
 		queue_free()
 
 func _on_pickuper_area_entered(area: Area2D) -> void:
