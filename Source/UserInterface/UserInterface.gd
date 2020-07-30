@@ -2,9 +2,12 @@ extends Control
 
 onready var scene_tree: = get_tree()
 onready var pause_overlay: ColorRect = get_node("PauseOverlay")
-var paused: = false setget set_paused
+var paused: = false setget SetIsPaused, GetIsPaused
 onready var score: Label = get_node("Label")
 onready var pause_title: Label = get_node("PauseOverlay/Title")
+
+
+signal game_paused
 
 func _ready() -> void:
 	PlayerData.connect("score_updated", self, "update_interface")
@@ -23,7 +26,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		self.paused = not paused
 		scene_tree.set_input_as_handled()
 
-func set_paused(value: bool) -> void:
+func SetIsPaused(value: bool) -> void:
 	paused = value
 	scene_tree.paused = value
 	pause_overlay.visible = value
+	emit_signal("game_paused")
+
+func GetIsPaused() -> bool:
+	return paused

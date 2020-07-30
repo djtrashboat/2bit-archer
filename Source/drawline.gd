@@ -38,5 +38,6 @@ func _end_line():
 	#global_position_i = get_global_mouse_position()
 	#global_position2 = get_global_mouse_position()
 	#draw_line(get_viewport().get_mouse_position(), get_viewport().get_mouse_position(), arrow_color, 0)
+	arrow_color.a = 0
 	update()
 	set_process(false)

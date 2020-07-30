@@ -24,9 +24,10 @@ func _process(delta: float) -> void:
 		_drawline(color)
 	if Input.is_action_just_released("click_left"):
 		_ditch_line()
-		
+
 func _drawline(color: Color):
-	$"draw line"._ready_to_draw(color)
+	if not get_tree().paused and not $".".get_parent().get_parent().name == "MainMenu": 
+		$"draw line"._ready_to_draw(color)
 
 func _ditch_line():
 	$"draw line"._end_line()

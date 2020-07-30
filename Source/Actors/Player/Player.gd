@@ -148,5 +148,4 @@ func _on_arrow_delay_timeout() -> void:
 
 func KillPlayer() -> void:
 		PlayerData.deaths += 1
-		position.x = 33
-		position.y = 64
+		queue_free()
