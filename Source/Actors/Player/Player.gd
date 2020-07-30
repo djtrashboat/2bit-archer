@@ -129,8 +129,8 @@ func _on_EnemyDetector_body_entered(body: Node) -> void:
 		is_shielded = false
 		$bubble.hide()
 	else:
-		position.x = 33
-		position.y = 64
+		KillPlayer()
+		
 
 func _on_pickuper_area_entered(area: Area2D) -> void:
 	if area.name == "pickup_shield":
@@ -144,3 +144,9 @@ func _on_pickuper_area_entered(area: Area2D) -> void:
 
 func _on_arrow_delay_timeout() -> void:
 	can_shoot = true
+
+
+func KillPlayer() -> void:
+		PlayerData.deaths += 1
+		position.x = 33
+		position.y = 64

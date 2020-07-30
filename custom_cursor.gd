@@ -1,5 +1,7 @@
 extends Node2D
 
+onready var cursor := get_node("draw line")
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	_ditch_line()

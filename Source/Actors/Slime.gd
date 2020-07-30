@@ -1,13 +1,20 @@
 extends "res://Source/Actors/enemy.gd"
 
+
+
+# Constants
 export var directionfrequency: int = 5#de quantos em quantos pulos ele muda de direcao
 var changedirectionin: int
 export var initial_direction: int = 1#se 1, ele comeca para a direita, se -1 ele comeca para a esquerda
 export var jump_timer = 1.0#de quanto em quanto tempo ele pula
+export var base_Slime_score: = 100 #base score for slime
+#######################
+
 
 func _on_Arrow_detector_area_entered(area: Area2D) -> void: #slime go die die if arrow go boom boom
 	if area.name == "ArrowCol":
-		queue_free()
+		die()
+		
 
 
 func _on_Timer_timeout() -> void:#no final do timer, o slime pula
@@ -37,3 +44,6 @@ func _jump():
 
 #func _update():
 #	pass
+func die():
+	queue_free()
+	PlayerData.score += base_Slime_score
