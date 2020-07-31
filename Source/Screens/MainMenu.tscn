@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/MainMenu/background.png" type="Texture" id=1]
 [ext_resource path="res://Source/UserInterface/Title.tscn" type="PackedScene" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://Assets/ui_theme.tres" type="Theme" id=5]
 [ext_resource path="res://cursor.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Source/drawline.gd" type="Script" id=7]
-[ext_resource path="res://custom_cursor.gd" type="Script" id=8]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -57,11 +56,10 @@ margin_bottom = 66.0
 pause_mode = 2
 layer = 101
 
-[node name="Cursor" type="Node2D" parent="CursorCanvas" instance=ExtResource( 6 )]
+[node name="Cursor" parent="CursorCanvas" instance=ExtResource( 6 )]
 pause_mode = 2
 modulate = Color( 0.976471, 0.972549, 0.909804, 1 )
 self_modulate = Color( 0.976471, 0.972549, 0.909804, 1 )
-script = ExtResource( 8 )
 
 [node name="draw line" type="Node2D" parent="CursorCanvas/Cursor"]
 modulate = Color( 0.976471, 0.972549, 0.909804, 1 )

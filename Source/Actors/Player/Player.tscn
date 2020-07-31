@@ -26,11 +26,11 @@ region = Rect2( 144, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
-region = Rect2( 96, 0, 16, 16 )
+region = Rect2( 64, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 2 )
-region = Rect2( 112, 0, 16, 16 )
+region = Rect2( 80, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 2 )
@@ -42,11 +42,11 @@ region = Rect2( 48, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 2 )
-region = Rect2( 64, 0, 16, 16 )
+region = Rect2( 96, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 2 )
-region = Rect2( 80, 0, 16, 16 )
+region = Rect2( 112, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 2 )
@@ -78,7 +78,7 @@ animations = [ {
 }, {
 "frames": [ SubResource( 5 ), SubResource( 6 ) ],
 "loop": true,
-"name": "fall_0",
+"name": "jump_1",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 7 ), SubResource( 8 ) ],
@@ -88,7 +88,7 @@ animations = [ {
 }, {
 "frames": [ SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
-"name": "jump_1",
+"name": "fall_0",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
@@ -226,6 +226,7 @@ shape = SubResource( 18 )
 visible = false
 position = Vector2( 0, -8 )
 frames = SubResource( 27 )
+frame = 2
 playing = true
 
 [node name="wings" type="AnimatedSprite" parent="."]
@@ -244,8 +245,8 @@ hframes = 2
 
 [node name="Arrow" parent="." instance=ExtResource( 4 )]
 position = Vector2( 0, -8 )
-gravity = 400.0
-_speed = Vector2( 10, 10 )
+gravity = 200.0
+_speed = Vector2( 5, 5 )
 
 [node name="arrow_delay" type="Timer" parent="."]
 wait_time = 0.75
