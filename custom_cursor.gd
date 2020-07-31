@@ -2,6 +2,7 @@ extends Node2D
 
 onready var cursor := get_node("draw line")
 
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	_ditch_line()
@@ -28,6 +29,7 @@ func _process(delta: float) -> void:
 func _drawline(color: Color):
 	if not get_tree().paused and not $".".get_parent().get_parent().name == "MainMenu": 
 		$"draw line"._ready_to_draw(color)
-
+		
 func _ditch_line():
 	$"draw line"._end_line()
+	

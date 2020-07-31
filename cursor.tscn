@@ -1,13 +1,41 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://custom_cursor.gd" type="Script" id=2]
 [ext_resource path="res://Assets/cursor-sheet.png" type="Texture" id=3]
 
+[sub_resource type="Gradient" id=4]
+colors = PoolColorArray( 1, 0, 0.638672, 1, 0, 0.0214844, 1, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.753165, 0.806818 ), -0.377991, -0.377991, 0, 0, Vector2( 0.911392, 0.525 ), -1.81939, -1.81939, 0, 0, Vector2( 1, 0 ), -3.0403, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 30.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 186.8
+scale = 2.0
+scale_curve = SubResource( 3 )
+color_ramp = SubResource( 5 )
+
 [node name="Node2D" type="Node2D"]
-modulate = Color( 0.592157, 0.854902, 0.454902, 1 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
 centered = false
 hframes = 5
+
+[node name="JumpingLineEffect" type="Particles2D" parent="Sprite"]
+amount = 20
+local_coords = false
+process_material = SubResource( 1 )
