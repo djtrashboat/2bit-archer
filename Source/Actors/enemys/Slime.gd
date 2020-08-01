@@ -1,4 +1,4 @@
-extends "res://Source/Actors/enemy.gd"
+extends "res://Source/Actors/enemys/enemy.gd"
 
 
 

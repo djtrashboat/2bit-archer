@@ -18,27 +18,27 @@ region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
-region = Rect2( 128, 0, 16, 16 )
+region = Rect2( 160, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 2 )
-region = Rect2( 144, 0, 16, 16 )
+region = Rect2( 176, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
-region = Rect2( 64, 0, 16, 16 )
+region = Rect2( 192, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 2 )
-region = Rect2( 80, 0, 16, 16 )
+region = Rect2( 208, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 2 )
-region = Rect2( 32, 0, 16, 16 )
+region = Rect2( 128, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 2 )
-region = Rect2( 48, 0, 16, 16 )
+region = Rect2( 144, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 2 )
@@ -50,19 +50,19 @@ region = Rect2( 112, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 2 )
-region = Rect2( 160, 0, 16, 16 )
+region = Rect2( 64, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 2 )
-region = Rect2( 176, 0, 16, 16 )
+region = Rect2( 80, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 2 )
-region = Rect2( 192, 0, 16, 16 )
+region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 2 )
-region = Rect2( 208, 0, 16, 16 )
+region = Rect2( 48, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=15]
 animations = [ {
@@ -71,19 +71,14 @@ animations = [ {
 "name": "idle",
 "speed": 3.0
 }, {
-"frames": [ SubResource( 3 ), SubResource( 4 ) ],
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
 "loop": true,
-"name": "fall_1",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 5 ), SubResource( 6 ) ],
-"loop": true,
-"name": "jump_1",
+"name": "populo",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
-"name": "jump_0",
+"name": "fall_1",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 9 ), SubResource( 10 ) ],
@@ -91,9 +86,14 @@ animations = [ {
 "name": "fall_0",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
+"frames": [ SubResource( 11 ), SubResource( 12 ) ],
 "loop": true,
-"name": "populo",
+"name": "jump_1",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 13 ), SubResource( 14 ) ],
+"loop": true,
+"name": "jump_0",
 "speed": 5.0
 } ]
 
@@ -211,7 +211,6 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetector"]
-visible = false
 position = Vector2( -1, 8 )
 shape = SubResource( 17 )
 
@@ -226,7 +225,7 @@ shape = SubResource( 18 )
 visible = false
 position = Vector2( 0, -8 )
 frames = SubResource( 27 )
-frame = 2
+frame = 6
 playing = true
 
 [node name="wings" type="AnimatedSprite" parent="."]
@@ -245,12 +244,15 @@ hframes = 2
 
 [node name="Arrow" parent="." instance=ExtResource( 4 )]
 position = Vector2( 0, -8 )
-gravity = 200.0
 _speed = Vector2( 5, 5 )
 
 [node name="arrow_delay" type="Timer" parent="."]
 wait_time = 0.75
 one_shot = true
+
+[node name="dmg_delay" type="Timer" parent="."]
+one_shot = true
 [connection signal="body_entered" from="EnemyDetector" to="." method="_on_EnemyDetector_body_entered"]
 [connection signal="area_entered" from="pickuper" to="." method="_on_pickuper_area_entered"]
 [connection signal="timeout" from="arrow_delay" to="." method="_on_arrow_delay_timeout"]
+[connection signal="timeout" from="dmg_delay" to="." method="_on_dmg_delay_timeout"]

@@ -15,6 +15,7 @@ var is_shielded: bool = false
 var is_winged: bool = false
 var extra_jump: bool = false
 var can_shoot: bool = true
+var imune: bool = false
 
 func _physics_process(delta: float) -> void:
 	_velocity.y += gravity * delta#aplicando a gravidade
@@ -121,16 +122,18 @@ func play_animation(velocity: Vector2) -> void:#toca animacao
 
 
 func _on_EnemyDetector_body_entered(body: Node) -> void:
-	if is_winged:
-		is_winged = false
-		extra_jump = false
-		$wings.hide()
-	elif is_shielded:
-		is_shielded = false
-		$bubble.hide()
-	else:
-		KillPlayer()
-		
+	if !imune:
+		if is_winged:
+			is_winged = false
+			extra_jump = false
+			$wings.hide()
+		elif is_shielded:
+			is_shielded = false
+			$bubble.hide()
+		else:
+			KillPlayer()
+		imune = true
+		$dmg_delay.start()
 
 func _on_pickuper_area_entered(area: Area2D) -> void:
 	if area.name == "pickup_shield":
@@ -149,3 +152,7 @@ func _on_arrow_delay_timeout() -> void:
 func KillPlayer() -> void:
 		PlayerData.deaths += 1
 		queue_free()
+
+
+func _on_dmg_delay_timeout() -> void:
+	imune = false
