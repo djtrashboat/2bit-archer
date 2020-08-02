@@ -40,7 +40,7 @@ func _UpdateAnimationPlayer() -> void:
 	var lineVector:= Vector2(globalPosition_f*-1 +globalPosition_i)
 	var upperBase:= Vector2(-lineVector.length()/4,-15)
 	var lowerBase:= Vector2(-lineVector.length()*3/4, 15)
-	print(rad2deg(startingKey.angle_to_point(lineVector))) # debugging
+	#print(rad2deg(startingKey.angle_to_point(lineVector))) # debugging
 
 	upperKey = startingKey + _vector_rotation(upperBase,  startingKey.angle_to_point(lineVector))
 	lowerKey = startingKey + _vector_rotation(lowerBase, startingKey.angle_to_point(lineVector))

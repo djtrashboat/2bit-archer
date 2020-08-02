@@ -35,7 +35,7 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="pickup_wing" type="Area2D" parent="."]
@@ -44,4 +44,4 @@ collision_layer = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pickup_wing"]
 position = Vector2( 1, 0 )
 shape = SubResource( 6 )
-[connection signal="body_entered" from="pickup_wing" to="." method="_on_pickup_wing_body_entered"]
+[connection signal="area_entered" from="pickup_wing" to="." method="_on_pickup_wing_area_entered"]
