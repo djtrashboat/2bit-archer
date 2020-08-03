@@ -46,7 +46,9 @@ func die():
 
 
 
-func _on_enemy_shield_area_entered(area: Area2D) -> void:
+func _on_enemy_shield1_area_entered(area: Area2D) -> void:
 	if area.name == "ArrowCol":
 		$shield1.queue_free()
+func _on_enemy_shield2_area_entered(area: Area2D) -> void:
+	if area.name == "ArrowCol":
 		$shield2.queue_free()
