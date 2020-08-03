@@ -1,7 +1,5 @@
 extends "res://Source/Actors/enemys/enemy.gd"
 
-
-
 # Constants
 export var directionfrequency: int = 5#de quantos em quantos pulos ele muda de direcao
 var changedirectionin: int
@@ -11,11 +9,9 @@ export var base_Slime_score: = 100 #base score for slime
 #######################
 
 
-func _on_arrow_detector_area_entered(area: Area2D) -> void: #slime go die die if arrow go boom boom
+func _on_arrow_detector_area_entered(area: Area2D) -> void:
 	if area.name == "ArrowCol":
 		die()
-		
-
 
 func _on_Timer_timeout() -> void:#no final do timer, o slime pula
 	_jump()#go wush
@@ -47,3 +43,10 @@ func _jump():
 func die():
 	queue_free()
 	PlayerData.score += base_Slime_score
+
+
+
+func _on_enemy_shield_area_entered(area: Area2D) -> void:
+	if area.name == "ArrowCol":
+		$shield1.queue_free()
+		$shield2.queue_free()

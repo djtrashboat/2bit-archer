@@ -42,13 +42,13 @@ shape = SubResource( 4 )
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.5
 
-[node name="Arrow_detector" type="Area2D" parent="."]
+[node name="arrow_detector" type="Area2D" parent="."]
 position = Vector2( 0, -3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Arrow_detector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="arrow_detector"]
 modulate = Color( 0.639216, 0.588235, 0.933333, 1 )
 position = Vector2( 0, 4 )
 rotation = -1.5708
 shape = SubResource( 5 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="area_entered" from="Arrow_detector" to="." method="_on_Arrow_detector_area_entered"]
+[connection signal="area_entered" from="arrow_detector" to="." method="_on_arrow_detector_area_entered"]

@@ -47,7 +47,8 @@ func _on_impact(): #quando a flecha bate, para de tocar animacao e de ter fisica
 
 
 func _on_ArrowCol_area_entered(area: Area2D) -> void:#quando a flecha bate no slime, ela some
-	if area.name == "Arrow_detector":
+	if area.name == "arrow_detector" or area.name == "enemy_shield":
+		print("arrowqfree")
 		queue_free()
 
 func _set_pos(new_pos: Vector2):
