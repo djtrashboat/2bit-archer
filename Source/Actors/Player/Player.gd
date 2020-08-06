@@ -6,6 +6,7 @@ var global_position_f: Vector2#guarda a posicao de quando solta o mouse
 onready var arrow_position_i: Vector2 = get_viewport().get_mouse_position()#guarda a posicao do clique do mouse
 onready var arrow_position_f: Vector2 = get_viewport().get_mouse_position()#guarda a posicao de quando solta o mouse
 const Arrow_Projectile = preload("res://Source/Actors/Player/Arrow.tscn")
+onready var _gravity = gravity
 
 var enable_mov: bool #se true o player pode comandar o personagem
 var populo: bool = false
@@ -18,7 +19,7 @@ var can_shoot: bool = true
 var imune: bool = false
 
 func _physics_process(delta: float) -> void:
-	_velocity.y += gravity * delta#aplicando a gravidade
+	_velocity.y += _gravity * delta#aplicando a gravidade
 	if $ceilingcast.is_colliding():#detecta se o player esta no teto
 		_velocity.y = 20 #max(_velocity.y, -_velocity.y) * 0.3#se o player estiver no teto ele ganha velocidade em y para cair e nao grudar la
 	elif is_on_wall():#bounce bounce (on walls)
@@ -143,6 +144,11 @@ func _on_pickuper_area_entered(area: Area2D) -> void:
 		is_winged = true
 		extra_jump = true
 		$wings.show()
+	if area.name == "sticky_wall_area":
+		_velocity *= 0
+		enable_mov = true
+		_gravity *= 0.06
+		$AnimatedSprite.play("idle")
 
 
 func _on_arrow_delay_timeout() -> void:
@@ -156,3 +162,7 @@ func KillPlayer() -> void:
 
 func _on_dmg_delay_timeout() -> void:
 	imune = false
+
+
+func _on_pickuper_area_exited(area: Area2D) -> void:
+	_gravity = gravity
