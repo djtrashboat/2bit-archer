@@ -5,7 +5,7 @@ export var directionfrequency: int = 5#de quantos em quantos pulos ele muda de d
 var changedirectionin: int
 export var initial_direction: int = 1#se 1, ele comeca para a direita, se -1 ele comeca para a esquerda
 export var jump_timer = 1.0#de quanto em quanto tempo ele pula
-export var base_Slime_score: = 100 #base score for slime
+export var base_Slime_score: = 200 #base score for slime
 #######################
 
 
