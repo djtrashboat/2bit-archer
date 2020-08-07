@@ -52,6 +52,7 @@ centered = false
 hframes = 5
 
 [node name="JumpingLineEffect" type="Particles2D" parent="Sprite"]
+visible = false
 position = Vector2( 0.734246, 0.860661 )
 amount = 30
 lifetime = 0.4
