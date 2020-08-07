@@ -29,11 +29,12 @@ func launch_arrow(strength: Vector2) -> void:
 	#set_process(true)
 	var temp = global_transform#guarda a posicao
 	var scene = get_tree().current_scene#store a cena
+	_velocity.x = get_parent()._velocity.x
 	get_parent().remove_child(self)#player deixa de ser pai
 	scene.add_child(self)#agora flecha eh filha da cena
 	global_transform = temp#posicao dela eh a posicao que foi guardada antes
 	position.y -= 6 #pra nao soltar flecha do pe
-	_velocity = strength * _speed
+	_velocity += strength * _speed
 	#show()
 	set_physics_process(true)#inicia o processo de fisica
 
@@ -43,7 +44,7 @@ func _on_impact(): #quando a flecha bate, para de tocar animacao e de ter fisica
 	$ArrowAnimatedSprite.stop()
 	set_physics_process(false)#desliga a fisica
 	$ArrowCol.queue_free()
-	#$qfreetimer.start()
+	$qfreetimer.start()
 
 
 func _on_ArrowCol_area_entered(area: Area2D) -> void:#quando a flecha bate no slime, ela some
@@ -53,3 +54,7 @@ func _on_ArrowCol_area_entered(area: Area2D) -> void:#quando a flecha bate no sl
 
 func _set_pos(new_pos: Vector2):
 	set_global_position(new_pos)
+
+
+func _on_qfreetimer_timeout() -> void:
+	queue_free()

@@ -54,4 +54,9 @@ shape = SubResource( 5 )
 modulate = Color( 0.454902, 0.462745, 1, 1 )
 position = Vector2( 3, 0 )
 shape = SubResource( 6 )
+
+[node name="qfreetimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 [connection signal="area_entered" from="ArrowCol" to="." method="_on_ArrowCol_area_entered"]
+[connection signal="timeout" from="qfreetimer" to="." method="_on_qfreetimer_timeout"]
