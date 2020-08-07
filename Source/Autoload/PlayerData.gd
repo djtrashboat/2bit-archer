@@ -20,4 +20,3 @@ func set_deaths(value: int) -> void:
 func reset() -> void:
 	score = 0
 	deaths = 0
-	
