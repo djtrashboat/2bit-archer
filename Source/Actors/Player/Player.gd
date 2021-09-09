@@ -50,16 +50,16 @@ func _on_dmg_delay_timeout() -> void:
 #*******************************************
 func _physics_process(delta: float) -> void:
 	_velocity.y += gravitytemp * delta#aplicando a gravidade
-	if $ceilingcast.is_colliding():#detecta se o player esta no teto
+	if is_on_ceiling():#detecta se o player esta no teto
 		_velocity.y = 20 #max(_velocity.y, -_velocity.y) * 0.3#se o player estiver no teto ele ganha velocidade em y para cair e nao grudar la
-	elif is_on_wall():#bounce bounce (on walls)
+	elif (is_on_wall() or is_on_floor()):#bounce bounce (on walls)
 		_velocity.x *= -0.3#coeficiente de bounce
 		enable_mov = true#quando o player bate na parede, ele ganha o comando de volta
 		if is_winged:#se ele estiver alado, ele tambem ganha seu pulo extra de volta
 			extra_jump = true
 	if enable_mov:#os comandos so funcionam se enablemov for true
 		_get_input()
-	move_and_slide(_velocity * _speed)#vrummmm
+	move_and_slide(_velocity * _speed, Vector2.UP)#vrummmm
 	#if can_shoot:
 	#_get_arrow_strength()#chama o input da flecha
 #*******************************************
@@ -83,7 +83,8 @@ func _get_input():
 	if Input.is_action_just_released("click_right"):#guarda a posicao de quando solta o mouse
 		#global_position_f = get_global_mouse_position()
 		global_position_f = get_viewport().get_mouse_position()
-		_velocity = calculate_impulse(global_position_i, global_position_f)#aplica o impulso a velocidade assim que o player solta o mouse
+		var position_linha = global_position_i + ((global_position_f - global_position_i).normalized() * min((global_position_f-global_position_i).length(), 130))
+		_velocity = calculate_impulse(global_position_i, position_linha)#aplica o impulso a velocidade assim que o player solta o mouse
 		if extra_jump:# se o player tem um pulo extra, ele perde esse pulo ao usa-lo
 			extra_jump = false
 		else:
@@ -98,6 +99,7 @@ func _get_arrow_strength():
 	
 	if Input.is_action_just_released("click_left"):#guarda a posicao de quando solta o mouse
 		arrow_position_f = get_viewport().get_mouse_position()
+		arrow_position_f = arrow_position_i + ((arrow_position_f - arrow_position_i).normalized() * min((arrow_position_f-arrow_position_i).length(), 130))
 		hide_bow()#o arco desaaparece
 		
 		if can_shoot:#se pode atirar
@@ -133,7 +135,7 @@ func play_animation(velocity: Vector2) -> void:
 	else:
 		$bownarrow.frame = 1#se pode nao atirar, o arco fica sem outline
 	#player *****************
-	if is_on_wall():# and (velocity.x< (0.1) or velocity.x> (-0.1)):# ***o player detecta o chao como parede***, #sem a segudanda parte ele ficava girando o sprite sem parar
+	if is_on_floor():# and (velocity.x< (0.1) or velocity.x> (-0.1)):# ***o player detecta o chao como parede***, #sem a segudanda parte ele ficava girando o sprite sem parar
 		$AnimatedSprite.play("idle")
 	elif velocity.y > 0.0:
 		if velocity.x == 0.0:

@@ -23,7 +23,8 @@ func _ready_to_draw(color: Color):
 
 func _draw():
 	globalPosition_f = globalPosition_i - mousePosition_i + get_viewport().get_mouse_position() #just breaking this into 2
-	draw_line(globalPosition_i, globalPosition_f, arrowColor, 1.5)
+	var position_linha = globalPosition_i + ((globalPosition_f - globalPosition_i).normalized() * min((globalPosition_f-globalPosition_i).length(), 130))
+	draw_line(globalPosition_i, position_linha, arrowColor, 1.5)
 
 
 func _vector_rotation(vector: Vector2, angle: float) -> Vector2:	# Vector rotation
